@@ -1,5 +1,6 @@
 import { TodoView as View } from './Todo.view.js';
 import { TodoModel as Model } from './Todo.model.js';
+import events from '../helpers/events.js';
 
 export class Todo {
     constructor() {

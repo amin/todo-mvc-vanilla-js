@@ -25,8 +25,8 @@
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   },
-  "name": "Quickwise",
-  "description": "Be quick, be wise.",
+  "name": "Todo",
+  "description": ".",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
@@ -183,12 +183,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amin/babel-sass-handlebars.git"
+    "url": "git+https://github.com/amin/todo.git"
   },
   "author": "Amin El-Rifai",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/amin/babel-sass-handlebars/issues"
+    "url": "https://github.com/amin/todo/issues"
   },
-  "homepage": "https://github.com/amin/babel-sass-handlebars#readme"
+  "homepage": "https://github.com/amin/todo#readme"
 }
