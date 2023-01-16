@@ -1,6 +1,9 @@
 import { TodoView as View } from './Todo.view.js';
 import { TodoModel as Model } from './Todo.model.js';
-import events from '../helpers/events.js';
+
+import { todoItem } from './components/index.js'
+
+console.log(todoItem)
 
 export class Todo {
     constructor() {
@@ -9,6 +12,6 @@ export class Todo {
     }
 
     initialise = () => {
-
+        this.view.render();
     }
 }
