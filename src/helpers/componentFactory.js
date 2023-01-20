@@ -1,13 +1,9 @@
 export const componentFactory = {
-
-    init: function (element) {
-        if (!element) throw element
-        this.el = element;
+    on: function (element, event, handler) {
+        if (!element) return;
+        this.elements
+            .querySelectorAll(element)
+            .forEach((entry) => entry.addEventListener(event, handler));
         return this;
     },
-
-    on: function (element, handler) {
-        element.addEventListener(event, handler)
-        return this;
-    }
-}
+};
