@@ -13,6 +13,10 @@ export class TodoModel {
             "1974238445",
             JSON.stringify({ task: "buy a car", completed: false })
         );
+        localStorage.setItem(
+            "2374238445",
+            JSON.stringify({ task: "sell your macbook and get a pc", completed: false })
+        );
     }
 
     get todos() {

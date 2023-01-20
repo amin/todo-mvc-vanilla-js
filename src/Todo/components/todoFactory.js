@@ -11,15 +11,9 @@ const todoFactory = Object.create(componentFactory, {
         },
     },
 
-    view: {
-        value: function () {
-            return this.elements;
-        },
-    },
-
     build: {
         value: function (i = 0, ul, arrlength = +this.todos?.length) {
-            if(!this.todos) return;
+            if (!this.todos) return;
             const fragment = new DocumentFragment();
 
             ul = ul instanceof Element ? ul : document.createElement("ul");

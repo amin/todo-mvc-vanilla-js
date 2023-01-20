@@ -12,7 +12,6 @@ export class TodoView {
 
     renderElements = (data) => {
         if (!(data instanceof Element)) return;
-        console.log(data);
         this.$todo.append(data);
     }
 
