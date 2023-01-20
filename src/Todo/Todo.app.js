@@ -14,14 +14,14 @@ export class Todo {
         this.todos = this.model.todos;
         this.view.initialise();
         todoFactory.build();
-        this.events()
     }
 
-    events = () => {
+    bindEvents = () => {
         todoFactory.on('li', 'click', ((e) => console.log(e.currentTarget)))
     }
 
     render = () => {
-        this.view.render(todoFactory.view());
+        this.view.renderElements(todoFactory.view());
+        this.bindEvents()
     }
 }
