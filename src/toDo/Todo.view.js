@@ -3,7 +3,7 @@ export class TodoView {
         this.$root = document.getElementById('root');
     }
 
-    render = () => {
+    initialise = () => {
         const baseView = require('./templates/Todo.handlebars')()
         this.renderHTML(this.$root, 'afterbegin', baseView)
     }

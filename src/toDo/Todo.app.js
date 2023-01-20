@@ -5,9 +5,9 @@ import { todoItems } from './components/index.js'
 
 
 const ul = todoItems.render();
-console.log(ul);
+const root = document.querySelector('body');
 
-
+root.append(ul);
 
 export class Todo {
     constructor() {
@@ -16,6 +16,6 @@ export class Todo {
     }
 
     initialise = () => {
-        this.view.render();
+        this.view.initialise();
     }
 }
