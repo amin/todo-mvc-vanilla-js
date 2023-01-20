@@ -13,11 +13,10 @@ export class Todo {
     constructor() {
         this.view = new View;
         this.model = new Model;
-
-    console.log(...this.model.todos)
     }
 
     initialise = () => {
+        this.todos = this.model.todos;
         this.view.initialise();
     }
 }
