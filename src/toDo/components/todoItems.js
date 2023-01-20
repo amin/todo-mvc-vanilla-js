@@ -1,7 +1,7 @@
 import { componentFactory } from "../../helpers/componentFactory.js";
 
 const todoItems = Object.create(componentFactory, {
-    list: {
+    todos: {
         value: [
             "Work on my car",
             "Buy some food",
@@ -11,10 +11,10 @@ const todoItems = Object.create(componentFactory, {
         ],
     },
     render: {
-        value: function (i = 0, ul, length = this.list.length) {
+        value: function (i = 0, ul, length = this.todos.length) {
             ul = ul instanceof Element ? ul : document.createElement("ul");
             const li = document.createElement("li");
-            li.textContent = this.list[i];
+            li.textContent = this.todos[i];
             ul.appendChild(li);
             return i < --length ? this.render(++i, ul) : ul;
         },
