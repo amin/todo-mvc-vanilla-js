@@ -3,11 +3,11 @@ import { componentFactory } from "../../helpers/componentFactory.js";
 const todoItems = Object.create(componentFactory, {
     todos: {
         value: [
-            {task: "Work on my car", completed: false, timestamp: Date.now(), id: 1},
-            {task: "Buy some food", completed: false, timestamp: Date.now(), id: 2},
-            {task: "Eat some chocolate", completed: false, timestamp: Date.now(), id: 3},
-            {task: "Play some GTA", completed: false, timestamp: Date.now(), id: 4},
-            {task: "Pwn some noobs", completed: false, timestamp: Date.now(), id: 5},
+            {task: "Work on my car", completed: false, id: Date.now()},
+            {task: "Buy some food", completed: false, id: Date.now()},
+            {task: "Eat some chocolate", completed: false, id: Date.now()},
+            {task: "Play some GTA", completed: false, id: Date.now()},
+            {task: "Pwn some noobs", completed: false, id: Date.now()},
         ]
     },
     render: {
@@ -29,7 +29,6 @@ const todoItems = Object.create(componentFactory, {
             destroy.value = 'Remove';
 
             li.dataset.completed = this.todos[i].completed;
-            li.dataset.timestamp = this.todos[i].timestamp;
             li.dataset.id = this.todos[i].id;
 
             li.append(checkbox, task, destroy)
