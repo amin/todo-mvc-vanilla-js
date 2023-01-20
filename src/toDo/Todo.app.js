@@ -1,9 +1,13 @@
-import { TodoView as View } from './Todo.view.js';
-import { TodoModel as Model } from './Todo.model.js';
+import { TodoView as View } from './Todo.view.js'
+import { TodoModel as Model } from './Todo.model.js'
 
-import { todoItem } from './components/index.js'
+import { todoItems } from './components/index.js'
 
-console.log(todoItem)
+
+const ul = todoItems.render();
+console.log(ul);
+
+
 
 export class Todo {
     constructor() {

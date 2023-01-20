@@ -1,12 +1,13 @@
 export const componentFactory = {
-    init: (element) => {
+
+    init: function (element) {
         if (!element) throw element
-            this.element = element
+        this.el = element;
         return this;
     },
 
-    on: (event, handler) => {
-        this.element.addEventListener(event, handler)
+    on: function (element, handler) {
+        element.addEventListener(event, handler)
         return this;
     }
 }
