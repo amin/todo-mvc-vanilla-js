@@ -7,4 +7,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const todo = new Todo();
     todo.initialise();
+    todo.render();
 });

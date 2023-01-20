@@ -8,6 +8,10 @@ export class TodoView {
         this.renderHTML(this.$root, 'afterbegin', baseView)
     }
 
+    render = (data) => {
+        console.log(data)
+    }
+
     renderHTML = (element, position, template) => {
         element.textContent = ''
         element.insertAdjacentHTML(position, template)

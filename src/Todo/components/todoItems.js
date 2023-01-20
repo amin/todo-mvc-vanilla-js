@@ -10,7 +10,7 @@ const todoItems = Object.create(componentFactory, {
             {task: "Pwn some noobs", completed: false, id: Date.now()},
         ]
     },
-    render: {
+    data: {
         value: function (i = 0, ul, arrlength = this.todos.length) {
             const fragment = new DocumentFragment();
 
