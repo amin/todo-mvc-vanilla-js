@@ -7,7 +7,6 @@ export class Todo {
         this.view = new View();
         this.model = new Model();
         this.#initialise();
-
     }
 
     #initialise = () => {
