@@ -11,12 +11,8 @@ const todoFactory = Object.create(componentFactory, {
         },
     },
 
-    build: {
-        value: function (i = 0, ul, arrlength = +this.todos?.length) {
-            if (!this.todos) return;
-            const fragment = new DocumentFragment();
-
-            ul = ul instanceof Element ? ul : document.createElement("ul");
+    createListItems: {
+        value: function (i) {
             const li = document.createElement("li");
 
             const checkbox = document.createElement("input");
@@ -26,23 +22,33 @@ const todoFactory = Object.create(componentFactory, {
             const task = document.createElement("input");
             task.type = "text";
             task.name = "task";
-            task.value = this.todos[i].task;
+            task.setAttribute("value", this.todos[i].task);
 
             const destroy = document.createElement("input");
             destroy.type = "button";
             destroy.name = "destroy";
-            destroy.value = "delete";
+            destroy.setAttribute("value", "delete");
 
             li.dataset.completed = this.todos[i].completed;
             li.dataset.id = this.todos[i].id;
 
             li.append(checkbox, task, destroy);
+            return li;
+        },
+    },
 
-            fragment.appendChild(li);
+    format: {
+        value: function (i = 0, ul, arrlength = this.todos?.length) {
+            const fragment = new DocumentFragment();
+            ul = ul instanceof Element ? ul : document.createElement("ul");
+
+            if (this.todos !== null)
+                fragment.appendChild(this.createListItems(i));
+
             ul.appendChild(fragment);
             this.elements = ul;
 
-            return i < --arrlength ? this.build(++i, ul) : this;
+            return i < --arrlength ? this.format(++i, ul) : this;
         },
     },
 });

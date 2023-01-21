@@ -12,7 +12,8 @@ export class TodoView {
 
     renderElements = (data) => {
         if (!(data instanceof Element)) return;
-        this.$todo.append(data);
+        this.$todo.innerText = '';
+        this.$todo.appendChild(data);
     }
 
     renderHTML = (element, position, template) => {
