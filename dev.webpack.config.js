@@ -60,7 +60,7 @@ module.exports = {
     devServer: {
         hot: true,
         devMiddleware: {
-            writeToDisk: true,
+            writeToDisk: false,
         },
         historyApiFallback: true,
         watchFiles: ["src/**/*/*.handlebars"],

@@ -62,7 +62,7 @@ const TodoFactory = Object.create(componentFactory, {
                       const filter = document.createElement("input");
                       filter.type = "button";
                       filter.name = "filter";
-                      filter.setAttribute("value", "view data-completed");
+                      filter.setAttribute("value", "view completed");
 
                       const reset = document.createElement("input");
                       reset.type = "button";
