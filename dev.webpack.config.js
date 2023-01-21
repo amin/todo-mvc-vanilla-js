@@ -27,8 +27,8 @@ module.exports = {
                         loader: "sass-loader",
                         options: {
                             sassOptions: {
-                            outputStyle: "compressed",
-                          },                   
+                                outputStyle: "compressed",
+                            },
                         },
                     },
                 ],
@@ -49,20 +49,23 @@ module.exports = {
     },
     output: {
         filename: "app.js",
-        path: path.resolve(__dirname + "/dist"),
+        path: path.resolve(__dirname + "./build"),
     },
     plugins: [
         new HtmlWebpackPlugin({
             filename: "index.html",
-            title: "amin.sh"
+            title: "amin.sh",
         }),
     ],
     devServer: {
         hot: true,
+        devMiddleware: {
+            writeToDisk: true,
+        },
         historyApiFallback: true,
         watchFiles: ["src/**/*/*.handlebars"],
         static: {
-            directory: "./dist/",
+            directory: "./build/",
         },
         port: 3000,
     },

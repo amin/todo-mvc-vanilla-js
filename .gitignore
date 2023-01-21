@@ -2,4 +2,4 @@ dist
 amin.sh.sublime-workspace
 node_modules
 .DS_Store
-node_modules
+build
