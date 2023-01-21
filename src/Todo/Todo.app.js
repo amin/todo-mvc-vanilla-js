@@ -1,6 +1,6 @@
 import { TodoView as View } from "./Todo.view.js";
 import { TodoModel as Model } from "./Todo.model.js";
-import { todoFactory } from "./components/index.js";
+import { TodoFactory } from "./components/index.js";
 
 export class Todo {
     constructor() {
@@ -10,32 +10,42 @@ export class Todo {
     }
 
     #initialise = () => {
-        todoFactory.todos = this.model.todos;
+        TodoFactory.todos = this.model.todos;
         this.view.initialise();
-        todoFactory.format();
+        TodoFactory.format();
         this.model.addEventListener("update", () => this.#update());
     };
 
     #bindEvents = () => {
-        todoFactory.on('input[name="checkbox"]', "click", (e) =>
+        TodoFactory.on('[name="new"]', "click", (e) =>
             console.log(e.currentTarget)
         );
-        todoFactory.on('input[name="task"]', "click", (e) =>
+
+        TodoFactory.on('[name="create"]', "click", (e) =>
             console.log(e.currentTarget)
         );
-        todoFactory.on('input[name="destroy"]', "click", (e) =>
-            this.model.delete(e.currentTarget.closest("li[data-id]"))
+
+        TodoFactory.on('[name="completed"]', "click", (e) =>
+            console.log(e.currentTarget)
+        );
+
+        TodoFactory.on('[name="task"]', "click", (e) =>
+            console.log(e.currentTarget)
+        );
+
+        TodoFactory.on('[name="destroy"]', "click", (e) =>
+            this.model.delete(e.currentTarget.closest("[data-id]"))
         );
     };
 
     #update = () => {
-        todoFactory.todos = this.model.todos;
-        todoFactory.format();
+        TodoFactory.todos = this.model.todos;
+        TodoFactory.format();
         this.render();
     };
 
     render = () => {
-        this.view.renderElements(todoFactory.elements);
         this.#bindEvents();
+        this.view.renderElements(TodoFactory.elements);
     };
 }

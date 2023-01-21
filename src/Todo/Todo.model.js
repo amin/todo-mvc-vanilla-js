@@ -2,24 +2,16 @@ export class TodoModel extends EventTarget {
     constructor() {
         super();
         localStorage.clear();
+        this.create('Buy some food');
+        this.create('travel the world');
+        this.create('buy a car');
+        this.create('sell your macbook and get a pc');
+    }
+
+    create = (task) => {
         localStorage.setItem(
-            "1374212237",
-            JSON.stringify({ task: "Buy some food", completed: false })
-        );
-        localStorage.setItem(
-            "1874238445",
-            JSON.stringify({ task: "travel the world", completed: false })
-        );
-        localStorage.setItem(
-            "1974238445",
-            JSON.stringify({ task: "buy a car", completed: false })
-        );
-        localStorage.setItem(
-            "2374238445",
-            JSON.stringify({
-                task: "sell your macbook and get a pc",
-                completed: false,
-            })
+            Date.now() + Math.floor(Math.random() * 10000),
+            JSON.stringify({ task: task, completed: false })
         );
     }
 
@@ -27,11 +19,11 @@ export class TodoModel extends EventTarget {
         Number(todo.dataset.id)
             ? localStorage.removeItem(todo.dataset.id)
             : console.warn("Task cannot be found.");
-        this.#update();
+        this.dispatchEvent(new CustomEvent("update"));
     };
 
-    #update = () => {
-        this.dispatchEvent(new CustomEvent("update"));
+    update = () => {
+        
     };
 
     get todos() {

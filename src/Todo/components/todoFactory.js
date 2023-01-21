@@ -1,6 +1,6 @@
 import { componentFactory } from "../../helpers/componentFactory.js";
 
-const todoFactory = Object.create(componentFactory, {
+const TodoFactory = Object.create(componentFactory, {
     todo: {
         set todos(value) {
             this.todos = value;
@@ -14,10 +14,11 @@ const todoFactory = Object.create(componentFactory, {
     createListItems: {
         value: function (i) {
             const li = document.createElement("li");
+            li.classList.add('todo__task')
 
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.name = "checkbox";
+            checkbox.name = "completed";
 
             const task = document.createElement("input");
             task.type = "text";
@@ -46,11 +47,32 @@ const todoFactory = Object.create(componentFactory, {
                 fragment.appendChild(this.createListItems(i));
 
             ul.appendChild(fragment);
-            this.elements = ul;
+            i < --arrlength
+                ? this.format(++i, ul)
+                : (() => {
+                      const input = document.createElement("input");
+                      input.type = "text";
+                      input.name = "new";
 
-            return i < --arrlength ? this.format(++i, ul) : this;
+                      const submit = document.createElement("input");
+                      submit.type = "button";
+                      submit.name = "create";
+                      submit.setAttribute("value", "create");
+
+                      const create = document.createElement('div');
+                      create.append(input, submit)
+
+                      create.classList.add('todo__new')
+                      ul.classList.add('todo__list')
+
+                      fragment.append(create, ul);
+
+
+                      this.elements = fragment;
+                      return this;
+                  })();
         },
     },
 });
 
-export { todoFactory };
+export { TodoFactory };
