@@ -11,6 +11,7 @@ export class Todo {
     }
 
     #initialise = () => {
+        console.log(TodoFactory.todos)
         TodoFactory.todos = this.model.todos;
         this.view.initialise();
         TodoFactory.format();

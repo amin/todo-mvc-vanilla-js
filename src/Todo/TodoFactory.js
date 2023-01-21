@@ -1,14 +1,9 @@
 import { componentFactory } from "../helpers/componentFactory.js";
 
 const TodoFactory = Object.create(componentFactory, {
-    todo: {
-        set todos(value) {
-            this.todos = value;
-        },
-
-        get todos() {
-            return this.todos;
-        },
+    todos: {
+        value: [],
+        writable: true
     },
 
     createListItems: {
