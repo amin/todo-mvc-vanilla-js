@@ -5,6 +5,7 @@ export class TodoModel extends EventTarget {
         this.create('Buy some food');
         this.create('travel the world');
         this.create('buy a car');
+        this.create('sell tesla stock to buy a volvo');
         this.create('sell your macbook and get a pc');
     }
 
@@ -22,8 +23,8 @@ export class TodoModel extends EventTarget {
         this.dispatchEvent(new CustomEvent("update"));
     };
 
-    update = () => {
-        
+    update = (todo) => {
+        console.log(todo)
     };
 
     get todos() {

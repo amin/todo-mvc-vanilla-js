@@ -30,8 +30,8 @@ export class Todo {
             console.log(e.currentTarget)
         );
 
-        TodoFactory.on('[name="task"]', "click", (e) =>
-            console.log(e.currentTarget)
+        TodoFactory.on('[name="task"]', "focusout", (e) =>
+            console.log(e.currentTarget.closest("[data-id]"))
         );
 
         TodoFactory.on('[name="destroy"]', "click", (e) =>
