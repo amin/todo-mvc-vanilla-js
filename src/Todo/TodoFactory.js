@@ -22,7 +22,6 @@ const TodoFactory = Object.create(componentFactory, {
             checkbox.checked = this.todos[i].completed;
             if (this.todos[i].completed) li.setAttribute('data-completed', '')
 
-
             const task = document.createElement("input");
             task.type = "text";
             task.name = "task";

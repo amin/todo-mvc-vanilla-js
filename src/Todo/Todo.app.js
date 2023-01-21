@@ -23,19 +23,19 @@ export class Todo {
         );
 
         TodoFactory.on('[name="create"]', "click", (e) =>
-            console.log(e.currentTarget)
+            this.model.create(e.currentTarget.parentNode.children.new.value)
         );
 
         TodoFactory.on('[name="completed"]', "click", (e) =>{
-            e.currentTarget.closest("[data-id]").toggleAttribute('data-completed');
+            this.model.check(e.currentTarget.closest("[data-id]").dataset.id)
         });
 
         TodoFactory.on('[name="task"]', "focusout", (e) =>
-            console.log(e.currentTarget.closest("[data-id]"))
+            this.model.update(e.currentTarget.closest("[data-id]"))
         );
 
         TodoFactory.on('[name="destroy"]', "click", (e) =>
-            this.model.delete(e.currentTarget.closest("[data-id]"))
+            this.model.delete(e.currentTarget.closest("[data-id]").dataset.id)
         );
     };
 

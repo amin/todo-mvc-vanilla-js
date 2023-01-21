@@ -2,23 +2,27 @@ export class TodoModel extends EventTarget {
     constructor() {
         super();
         localStorage.clear();
-        this.create('Buy some food');
-        this.create('travel the world');
-        this.create('buy a car');
-        this.create('sell tesla stock to buy a volvo');
-        this.create('sell your macbook and get a pc');
+        this.create('Buy fruits!');
     }
 
-    create = (task) => {
+    create = (task, id) => {
         localStorage.setItem(
-            Date.now() + Math.floor(Math.random() * 10000),
-            JSON.stringify({ task: task, completed: false })
+            id ? id : Date.now(),
+            task instanceof Object ? JSON.stringify(task) : JSON.stringify({ task: task, completed: false })
         );
+        this.dispatchEvent(new CustomEvent("update"));
     }
 
-    delete = (todo) => {
-        Number(todo.dataset.id)
-            ? localStorage.removeItem(todo.dataset.id)
+    check = (id) => {
+        const task = JSON.parse(localStorage.getItem(id));
+        task.completed = !task.completed;
+        this.create(task, id);
+        this.dispatchEvent(new CustomEvent("update"));
+    }
+
+    delete = (id) => {
+        Number(id)
+            ? localStorage.removeItem(id)
             : console.warn("Task cannot be found.");
         this.dispatchEvent(new CustomEvent("update"));
     };
