@@ -6,6 +6,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.insertAdjacentHTML("afterbegin", template());
 
     const todo = new Todo();
-    todo.initialise();
     todo.render();
 });
