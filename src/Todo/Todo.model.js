@@ -18,7 +18,7 @@ export class TodoModel extends EventTarget {
         const task = JSON.parse(localStorage.getItem(id));
         task.completed = !task.completed;
         this.create(task, id);
-    }
+    };
 
     delete = (id) => {
         Number(id)
@@ -28,7 +28,7 @@ export class TodoModel extends EventTarget {
     };
 
     filter = (todos) => {
-        return {tasks: todos.tasks.filter((e) => e.completed === true)}
+        return { tasks: todos.tasks.filter((e) => e.completed === true) };
     };
 
     update = (e) => {
@@ -40,14 +40,17 @@ export class TodoModel extends EventTarget {
 
     get todos() {
         if (!localStorage.length) return null;
-        let data = Object.keys(localStorage).reduce((accumulator, key, index) => {
-            accumulator.push(JSON.parse(localStorage.getItem(key)));
-            accumulator[index].id = key;
-            return accumulator;
-        }, []);
+        let data = Object.keys(localStorage).reduce(
+            (accumulator, key, index) => {
+                accumulator.push(JSON.parse(localStorage.getItem(key)));
+                accumulator[index].id = key;
+                return accumulator;
+            },
+            []
+        );
 
         data = data.sort((a, b) => b.id - a.id);
 
-        return { tasks: data }
+        return { tasks: data };
     }
 }
