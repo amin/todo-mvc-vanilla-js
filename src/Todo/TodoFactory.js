@@ -19,6 +19,9 @@ const TodoFactory = Object.create(componentFactory, {
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.name = "completed";
+            checkbox.checked = this.todos[i].completed;
+            if (this.todos[i].completed) li.setAttribute('data-completed', '')
+
 
             const task = document.createElement("input");
             task.type = "text";
@@ -30,7 +33,6 @@ const TodoFactory = Object.create(componentFactory, {
             destroy.name = "destroy";
             destroy.setAttribute("value", "delete");
 
-            li.dataset.completed = this.todos[i].completed;
             li.dataset.id = this.todos[i].id;
 
             li.append(checkbox, task, destroy);

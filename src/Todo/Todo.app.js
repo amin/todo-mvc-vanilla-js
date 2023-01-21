@@ -26,9 +26,9 @@ export class Todo {
             console.log(e.currentTarget)
         );
 
-        TodoFactory.on('[name="completed"]', "click", (e) =>
-            console.log(e.currentTarget)
-        );
+        TodoFactory.on('[name="completed"]', "click", (e) =>{
+            e.currentTarget.closest("[data-id]").toggleAttribute('data-completed');
+        });
 
         TodoFactory.on('[name="task"]', "focusout", (e) =>
             console.log(e.currentTarget.closest("[data-id]"))
