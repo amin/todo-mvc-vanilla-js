@@ -1,8 +1,7 @@
 export class TodoModel extends EventTarget {
     constructor() {
         super();
-        localStorage.clear();
-        this.create('Buy fruits!');
+  
     }
 
     create = (task, id) => {

@@ -14,13 +14,13 @@ const TodoFactory = Object.create(componentFactory, {
     createListItems: {
         value: function (i) {
             const li = document.createElement("li");
-            li.classList.add('todo__task')
+            li.classList.add("todo__task");
 
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.name = "completed";
             checkbox.checked = this.todos[i].completed;
-            if (this.todos[i].completed) li.setAttribute('data-completed', '')
+            if (this.todos[i].completed) li.setAttribute("data-completed", "");
 
             const task = document.createElement("input");
             task.type = "text";
@@ -60,16 +60,21 @@ const TodoFactory = Object.create(componentFactory, {
                       submit.name = "create";
                       submit.setAttribute("value", "create");
 
-                      const create = document.createElement('div');
-                      create.append(input, submit)
+                      const create = document.createElement("div");
+                      create.append(input, submit);
 
-                      create.classList.add('todo__new')
-                      ul.classList.add('todo__list')
+                      create.classList.add("todo__new");
+                      ul.classList.add("todo__list");
 
-                      fragment.append(create, ul);
-
-
+                      ul = Array.from(ul.children).sort(
+                          (a, b) =>
+                              b.getAttribute("data-id") -
+                              a.getAttribute("data-id")
+                      );
+                      
+                      fragment.append(create, ...ul);
                       this.elements = fragment;
+
                       return this;
                   })();
         },

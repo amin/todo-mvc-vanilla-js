@@ -18,20 +18,23 @@ export class Todo {
     };
 
     #bindEvents = () => {
-        TodoFactory.on('[name="new"]', "click", (e) =>
-            console.log(e.currentTarget)
-        );
+        TodoFactory.on('[name="new"]', "keyup", (e) => {
+            if (event.key !== 'Enter') return;
+                this.model.create(e.currentTarget.parentNode.children.new.value);
+                console.log(e)
+                e.currentTarget.focus();
+        });
 
-        TodoFactory.on('[name="create"]', "click", (e) =>
-            this.model.create(e.currentTarget.parentNode.children.new.value)
-        );
+        TodoFactory.on('[name="create"]', "click", (e) => {
+            this.model.create(e.currentTarget.parentNode.children.new.value);
+        });
 
         TodoFactory.on('[name="completed"]', "click", (e) =>{
             this.model.check(e.currentTarget.closest("[data-id]").dataset.id)
         });
 
         TodoFactory.on('[name="task"]', "focusout", (e) =>
-            this.model.update(e.currentTarget.closest("[data-id]"))
+            this.model.update(e.currentTarget.closest("[data-id]").dataset.id)
         );
 
         TodoFactory.on('[name="destroy"]', "click", (e) =>
