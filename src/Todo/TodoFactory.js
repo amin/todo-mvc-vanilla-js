@@ -33,7 +33,6 @@ const TodoFactory = Object.create(componentFactory, {
             destroy.setAttribute("value", "delete");
 
             li.dataset.id = this.todos[i].id;
-
             li.append(checkbox, task, destroy);
             return li;
         },
@@ -60,6 +59,16 @@ const TodoFactory = Object.create(componentFactory, {
                       submit.name = "create";
                       submit.setAttribute("value", "create");
 
+                      const filter = document.createElement("input");
+                      filter.type = "button";
+                      filter.name = "filter";
+                      filter.setAttribute("value", "view completed");
+
+                      const reset = document.createElement("input");
+                      reset.type = "button";
+                      reset.name = "reset";
+                      reset.setAttribute("value", "reset filter");
+
                       const create = document.createElement("div");
                       create.append(input, submit);
 
@@ -71,10 +80,9 @@ const TodoFactory = Object.create(componentFactory, {
                               b.getAttribute("data-id") -
                               a.getAttribute("data-id")
                       );
-                      
-                      fragment.append(create, ...ul);
-                      this.elements = fragment;
 
+                      fragment.append(create, filter, reset, ...ul);
+                      this.elements = fragment;
                       return this;
                   })();
         },
