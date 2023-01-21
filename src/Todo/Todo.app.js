@@ -1,7 +1,7 @@
 import { TodoModel as Model } from "./Todo.model.js";
 import { TodoView as View } from "./Todo.view.js";
-import { TodoFactory } from "./TodoFactory.js";
-import './Todo.sass'
+
+import "./Todo.sass";
 
 export class Todo {
     constructor() {
@@ -11,63 +11,61 @@ export class Todo {
     }
 
     #initialise = () => {
-        console.log(TodoFactory.todos)
-        TodoFactory.todos = this.model.todos;
-        this.view.initialise();
-        TodoFactory.format();
-        this.model.addEventListener("update", () => this.#update());
+        this.view.initialise(this.model.todos);
+        this.#bindEvents();
+        this.model.addEventListener("render", () =>
+            this.render(this.model.todos)
+        );
     };
 
     #bindEvents = () => {
-        TodoFactory.on('[name="new"]', "keyup", (e) => {
-            if (event.key !== 'Enter') return;
-                this.model.create(e.currentTarget.parentNode.children.new.value);
+        this.#on("click", '[type="checkbox"]', (e) => {
+            this.model.check(e.currentTarget.closest("[data-id]").dataset.id);
         });
 
-        TodoFactory.on('[name="create"]', "click", (e) => {
-            this.model.create(e.currentTarget.parentNode.children.new.value);
+        this.#on("click", '[name="submit"]', (e) => {
+            this.model.create(e.currentTarget.value);
+            e.stopPropagation();
+            e.preventDefault();
         });
 
-        TodoFactory.on('[name="completed"]', "click", (e) =>{
-            this.model.check(e.currentTarget.closest("[data-id]").dataset.id)
+        this.#on("keyup", '[name="create"]', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            if (event.key !== "Enter") return;
+            this.model.create(e.currentTarget.value);
+            e.currentTarget.focus();
         });
 
-        TodoFactory.on('[name="task"]', "change", (e) =>
-            this.model.update(e)
-        );
+        this.#on("change", '[name="task"]', (e) => {
+            this.model.update(e);
+        });
 
-        TodoFactory.on('[name="filter"]', "click", () =>
-            this.#filter()
-        );
+        this.#on("click", '[name="delete"]', (e) => {
+            this.model.delete(e.currentTarget.closest("[data-id]").dataset.id);
+        });
 
-        TodoFactory.on('[name="reset"]', "click", () =>
-            this.#reset()
-        );
+        this.#on("click", '[name="filter"]', () => {
+            this.#filter(this.model.todos);
+        });
 
-        TodoFactory.on('[name="destroy"]', "click", (e) =>
-            this.model.delete(e.currentTarget.closest("[data-id]").dataset.id)
-        );
+        this.#on("click", '[name="reset-filter"]', () => {
+            this.render(this.model.todos);
+        });
     };
 
-    #reset = () => {
-        TodoFactory.todos = this.model.todos
-        this.render();
-    }
-
-    #filter = () => {
-        if(!this.model.filter().length) return;
-        TodoFactory.todos = this.model.filter();
-        this.render();
-    }
-
-    #update = () => {
-        TodoFactory.todos = this.model.todos;
-        this.render();
+    #filter = (todos) => {
+        this.render(this.model.filter(todos));
     };
 
-    render = () => {
-        TodoFactory.format();
+    #on = (event, selector, handler) => {
+        return this.view.$root
+            .querySelectorAll(selector)
+            .forEach((entry) => entry.addEventListener(event, handler));
+    };
+
+    render = (data) => {
+        this.view.renderElements(data);
         this.#bindEvents();
-        this.view.renderElements(TodoFactory.elements);
     };
 }

@@ -1,1 +1,23 @@
-<section class="todo"></section>
+<section class="todo">
+  <div class="todo__create">
+      <input type="text" name="create">
+      <input type="submit" name="submit" value="create">
+  </div>
+
+  <div class="todo__list">
+    <ul class="todo__entries">
+      {{#each tasks}}
+        <li class="todo__item" data-completed={{completed}} data-id={{id}}>
+          <input type="checkbox" {{#if completed}}checked{{/if}}>
+          <input type="text" name="task" value="{{task}}">
+          <input type="button" name="delete" value="delete">
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="todo__controls">
+    <input type="button" name="filter" value="view completed">
+    <input type="button" name="reset-filter" value="reset filter">
+  </div>
+</section>

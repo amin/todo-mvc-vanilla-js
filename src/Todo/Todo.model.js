@@ -6,30 +6,29 @@ export class TodoModel extends EventTarget {
     create = (task, id) => {
         if (!task) return;
         localStorage.setItem(
-            id ? id : Date.now(),
+            id ? id : Date.now() + Math.floor(Math.random()),
             task instanceof Object
                 ? JSON.stringify(task)
                 : JSON.stringify({ task: task, completed: false })
         );
-        this.dispatchEvent(new CustomEvent("update"));
+        this.dispatchEvent(new CustomEvent("render"));
     };
 
     check = (id) => {
         const task = JSON.parse(localStorage.getItem(id));
         task.completed = !task.completed;
         this.create(task, id);
-    };
+    }
 
     delete = (id) => {
         Number(id)
             ? localStorage.removeItem(id)
             : console.warn("Task cannot be found.");
-        this.dispatchEvent(new CustomEvent("update"));
+        this.dispatchEvent(new CustomEvent("render"));
     };
 
-    filter = () => {
-        if (this.todos.filter((e) => e.completed).length === null) return;
-        return this.todos.filter((e) => e.completed);
+    filter = (todos) => {
+        return {tasks: todos.tasks.filter((e) => e.completed === true)}
     };
 
     update = (e) => {
@@ -41,10 +40,14 @@ export class TodoModel extends EventTarget {
 
     get todos() {
         if (!localStorage.length) return null;
-        return Object.keys(localStorage).reduce((accumulator, key, index) => {
+        let data = Object.keys(localStorage).reduce((accumulator, key, index) => {
             accumulator.push(JSON.parse(localStorage.getItem(key)));
             accumulator[index].id = key;
             return accumulator;
         }, []);
+
+        data = data.sort((a, b) => b.id - a.id);
+
+        return { tasks: data }
     }
 }

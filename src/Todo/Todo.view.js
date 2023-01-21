@@ -1,14 +1,16 @@
 export class TodoView {
-    initialise = () => {
+    initialise = (data) => {
         this.$root = document.getElementById('root');
-        const baseView = require('./Todo.handlebars')()
-        this.renderHTML(this.$root, 'afterbegin', baseView)
+        this.renderHTML(this.$root, 'afterbegin', this.renderTemplate(data))
         this.$todo = this.$root.querySelector('section.todo');
     }
 
     renderElements = (data) => {
-        this.$todo.textContent = '';
-        this.$todo.appendChild(data);
+        this.renderHTML(this.$root, 'afterbegin', this.renderTemplate(data))
+    }
+
+    renderTemplate = (data) => {
+        return require('./Todo.handlebars')(data)
     }
 
     renderHTML = (element, position, template) => {
