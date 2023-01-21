@@ -1,4 +1,4 @@
-import { componentFactory } from "../../helpers/componentFactory.js";
+import { componentFactory } from "../helpers/componentFactory.js";
 
 const TodoFactory = Object.create(componentFactory, {
     todo: {

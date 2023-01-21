@@ -1,7 +1,7 @@
 export class TodoView {
     initialise = () => {
         this.$root = document.getElementById('root');
-        const baseView = require('./templates/Todo.handlebars')()
+        const baseView = require('./Todo.handlebars')()
         this.renderHTML(this.$root, 'afterbegin', baseView)
         this.$todo = this.$root.querySelector('section.todo');
     }

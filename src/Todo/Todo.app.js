@@ -1,6 +1,7 @@
-import { TodoView as View } from "./Todo.view.js";
 import { TodoModel as Model } from "./Todo.model.js";
-import { TodoFactory } from "./components/index.js";
+import { TodoView as View } from "./Todo.view.js";
+import { TodoFactory } from "./TodoFactory.js";
+import './Todo.sass'
 
 export class Todo {
     constructor() {
