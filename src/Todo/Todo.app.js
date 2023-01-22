@@ -40,6 +40,10 @@ export class Todo {
             this.model.update(e);
         });
 
+        this.#on("focusin", '[name="task"]', (e) => 
+         (e.currentTarget.parentNode.dataset.completed) ? e.currentTarget.parentNode.firstElementChild.checked = false : (false)
+        );
+
         this.#on("click", '[name="delete"]', (e) => {
             this.model.delete(e.currentTarget.closest("[data-id]").dataset.id);
         });
