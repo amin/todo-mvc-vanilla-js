@@ -1,5 +1,5 @@
 export class TodoView {
-    initialise = (data) => {
+    initialize = (data) => {
         this.$root = document.getElementById("root");
         this.renderElements(data);
     };

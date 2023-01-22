@@ -38,9 +38,13 @@ export class TodoModel extends EventTarget {
         );
     };
 
+    clear = () => {
+        localStorage.clear();
+    }
+
     get todos() {
         if (!localStorage.length) return null;
-        let data = Object.keys(localStorage).reduce(
+        const data = Object.keys(localStorage).reduce(
             (accumulator, key, index) => {
                 accumulator.push(JSON.parse(localStorage.getItem(key)));
                 accumulator[index].id = key;
@@ -48,9 +52,6 @@ export class TodoModel extends EventTarget {
             },
             []
         );
-
-        data = data.sort((a, b) => b.id - a.id);
-
-        return { tasks: data };
+        return { tasks: data.sort((a, b) => b.id - a.id) };
     }
 }

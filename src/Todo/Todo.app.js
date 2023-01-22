@@ -7,11 +7,11 @@ export class Todo {
     constructor() {
         this.view = new View();
         this.model = new Model();
-        this.#initialise();
+        this.#initialize();
     }
 
-    #initialise = () => {
-        this.view.initialise(this.model.todos);
+    #initialize = () => {
+        this.view.initialize(this.model.todos);
         this.#bindEvents();
         this.model.addEventListener("render", () =>
             this.render(this.model.todos)
@@ -23,10 +23,10 @@ export class Todo {
             this.model.check(e.currentTarget.closest("[data-id]").dataset.id);
         });
 
-        this.#on("click", '[name="submit"]', (e) => {
-            this.model.create(e.currentTarget.value);
+        this.#on("click", '[name="create"]', (e) => {
             e.stopPropagation();
             e.preventDefault();
+            this.model.create(e.currentTarget.value);
         });
 
         this.#on("keyup", '[name="create"]', (e) => {
@@ -52,10 +52,19 @@ export class Todo {
         this.#on("click", '[name="reset-filter"]', () => {
             this.render(this.model.todos);
         });
+
+        this.#on("click", '[name="clear"]', () => {
+            this.#clear();
+        });
     };
 
-    #filter = (todos) => {
-        this.render(this.model.filter(todos));
+    #clear = () => {
+        this.model.clear();
+        this.render();
+    };
+
+    #filter = (filter) => {
+        this.render(this.model.filter(filter));
     };
 
     #on = (event, selector, handler) => {
