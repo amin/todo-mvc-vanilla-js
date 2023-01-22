@@ -7,7 +7,6 @@ export class Todo {
     constructor() {
         this.view = new View();
         this.model = new Model();
-
         this.#initialize();
     }
 
@@ -24,10 +23,10 @@ export class Todo {
             this.model.check(e.currentTarget.closest("[data-id]").dataset.id);
         });
 
-        this.#on("click", '[name="create"]', (e) => {
+        this.#on("click", '[type="submit"][name="create"]', (e) => {
             e.stopPropagation();
             e.preventDefault();
-            this.model.create(e.currentTarget.value);
+            this.model.create(e.currentTarget.previousElementSibling.value);
         });
 
         this.#on("keyup", '[name="create"]', (e) => {

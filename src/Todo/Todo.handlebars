@@ -1,16 +1,16 @@
 <section class="todo">
   <div class="todo__create">
       <input type="text" name="create">
-      <input type="submit" name="create" value="create">
+      <input type="submit" name="create" value="Create">
   </div>
 
   <div class="todo__list">
     <ul class="todo__entries">
       {{#each tasks}}
         <li class="todo__item" data-completed={{completed}} data-id={{id}}>
-          <input type="checkbox" {{#if completed}}checked{{/if}}>
-          <input type="text" name="task" value="{{task}}">
-          <input type="button" name="delete" value="delete">
+          <input class="todo__completed" type="checkbox" {{#if completed}}checked{{/if}}>
+          <input class="todo__task" type="text" name="task" value="{{task}}">
+          <input class="todo__delete" type="button" name="delete" value="X">
         </li>
       {{/each}}
     </ul>

@@ -1,0 +1,113 @@
+$base-color: #1c2c2e
+$element-color: #47757A
+$border-color: #22383B
+$check-color: $border-color
+
+body
+    background: $base-color
+    box-sizing: border-box
+
+.todo
+    margin: 1em auto
+    max-width: 500px
+    padding: 1em
+    background: $element-color
+    border-radius: 0.25em
+    input
+        background: none
+        border: 0
+        outline: 0
+        font:
+            size: 1.2em
+            weight: 400
+.todo__create
+    display: flex
+    input[type="text"]
+        width: 100%
+        padding: 1em 2em
+        color: #fff
+        border-bottom: 1px solid $border-color
+    input[type="submit"]
+        margin-left: 1em
+        border-radius: 4px
+        min-width: 100px
+        text-transform: uppercase
+        letter-spacing: 1.5px
+        color: #fff
+        cursor: pointer
+        &:hover
+            background: $base-color
+
+.todo__entries
+    list-style-type: none
+    padding: 0
+    margin: 1em 0
+    display: flex
+    flex-direction: column
+
+.todo__item
+    display: flex
+    padding: 1em
+    input
+        outline: 0
+        font-weight: 300
+        color: #fff
+.todo__item .todo__
+    &completed
+        position: relative
+        cursor: pointer
+        visibility: hidden
+        align-self: center
+        margin-right: 1em
+        &::before
+            width: 30px
+            height: 30px
+            visibility: visible
+            position: absolute
+            transform: translate(0px, -5px)
+            content: ""
+            background: $check-color
+            border-radius: 4px
+            inset: 0
+            opacity: 1       
+        &:checked
+            &+input[type="text"]
+                text-decoration: line-through
+            &::after
+                transform: translate(0px, -15px)
+                visibility: visible
+                position: absolute
+                content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E")
+                inset: 0
+
+    &task
+        width: 100%
+        background: none
+        border-bottom: 1px solid $border-color
+        margin: 0 1em
+        font-size: 1.1em
+        font-weight: 400
+        letter-spacing: 1.5px
+    &delete
+        cursor: pointer
+        color: #fff
+        background: $check-color
+        &:hover
+            background: #122021
+            color: #ccc
+        font:
+            size: 1em
+            weight: 300
+        min-width: 40px
+        min-height: 40px
+        border-radius: 1em
+.todo__controls
+    input
+        cursor: pointer
+        letter-spacing: 1.5px
+        font:
+            size: 1.1em
+            font-weight: 400
+        color: $check-color
+        &:hover
+            color: #fff
