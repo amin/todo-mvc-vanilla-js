@@ -7,6 +7,8 @@ body
     background: $base-color
 
 .todo
+    h1
+        color: $base-color
     margin: 1em 1em
     max-width: 500px
     padding: 1em
@@ -23,10 +25,13 @@ body
     display: flex
     input[type="text"]
         width: 100%
+        border-radius: 0
         padding: 0.75em
         color: #fff
         border-bottom: 1px solid $border-color
         margin-right: 1em
+        &:focus
+            border-bottom: 1px solid #72a6ad
     input[type="submit"]
         -webkit-appearance: none
         border-radius: 4px
@@ -36,8 +41,9 @@ body
         background: #22383B
         color: #fff
         cursor: pointer
-        &:hover
-            background: $base-color
+        @media (hover: hover)
+            &:hover
+                background: $base-color
 
 .todo__entries
     list-style-type: none
@@ -48,7 +54,7 @@ body
 
 .todo__item
     display: flex
-    padding: 1em
+    padding: 1em 0.5em
     input
         outline: 0
         font-weight: 300
@@ -59,13 +65,11 @@ body
         cursor: pointer
         visibility: hidden
         align-self: center
-        margin-right: 1em
+        min-width: 30px
+        min-height: 30px
         &::before
-            width: 30px
-            height: 30px
             visibility: visible
             position: absolute
-            transform: translate(0px, -5px)
             content: ""
             background: $check-color
             border-radius: 4px
@@ -78,10 +82,10 @@ body
             &+input[type="text"]
                 text-decoration: line-through
             &::after
-                transform: translate(0px, -15px)
+                transform: translate(-3px, -10px)
                 visibility: visible
                 position: absolute
-                content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E")
+                content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='limegreen' viewBox='0 0 24 24'%3E%3Cpath d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E")
                 inset: 0
 
     &task
@@ -89,9 +93,12 @@ body
         background: none
         border-bottom: 1px solid $border-color
         margin: 0 1em
+        border-radius: 0
         font-size: 1.1em
         font-weight: 400
         letter-spacing: 1.5px
+        &:focus
+            border-bottom: 1px solid #72a6ad
     &delete
         cursor: pointer
         color: #fff
@@ -102,8 +109,7 @@ body
         font:
             size: 1.1em
             weight: 300
-        min-width: 40px
-        min-height: 40px
+        padding: 0.5em 0.75em
         border-radius: 1em
 .todo__controls
     display: flex
@@ -111,14 +117,18 @@ body
     min-height: 170px
     justify-content: space-around
     input
-        -webkit-appearance: none
         background: $check-color
         border-radius: 4px
         height: 40px
         cursor: pointer
         letter-spacing: 1.5px
-        &:hover
-            background: $base-color
+        &[name="clear"]
+            background: #882828
+            &:hover
+                background: #5d1111
+        @media (hover: hover)
+            &:hover
+                background: $base-color
         font:
             size: 1.1em
             font-weight: 400
