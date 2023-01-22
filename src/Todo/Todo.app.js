@@ -44,12 +44,16 @@ export class Todo {
             this.model.delete(e.currentTarget.closest("[data-id]").dataset.id);
         });
 
-        this.#on("click", '[name="filter"]', (e) => {
-            this.model.filter('completed');
+        this.#on("click", '[name="filter-completed"]', (e) => {
+            this.model.filter(0);
         });
 
-        this.#on("click", '[name="reset-filter"]', () => {
+        this.#on("click", '[name="filter-reset"]', () => {
             this.#render(this.model.todos);
+        });
+
+        this.#on("click", '[name="filter-active"]', () => {
+            this.model.filter(1);
         });
 
         this.#on("click", '[name="clear"]', () => {

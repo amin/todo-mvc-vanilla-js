@@ -30,7 +30,7 @@ export class TodoModel extends EventTarget {
     filter = (filter) => {
         this.dispatchEvent(new CustomEvent("render", {
             detail: { 
-                todos: { tasks: this.todos.tasks.filter((e) => e.completed)} }
+                todos: { tasks: this.todos.tasks.filter((e) => !filter ? e.completed : !e.completed)} }
         }));
     };
 
