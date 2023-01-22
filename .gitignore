@@ -3,3 +3,5 @@ amin.sh.sublime-workspace
 node_modules
 .DS_Store
 build
+# Local Netlify folder
+.netlify

@@ -7,7 +7,7 @@ body
     background: $base-color
 
 .todo
-    margin: 1em 2em
+    margin: 1em 1em
     max-width: 500px
     padding: 1em
     background: $element-color
@@ -26,10 +26,11 @@ body
         padding: 0.75em
         color: #fff
         border-bottom: 1px solid $border-color
+        margin-right: 1em
     input[type="submit"]
-        margin-left: 1em
+        -webkit-appearance: none
         border-radius: 4px
-        min-width: 100px
+        min-width: 120px
         text-transform: uppercase
         letter-spacing: 1.5px
         background: #22383B
@@ -69,7 +70,10 @@ body
             background: $check-color
             border-radius: 4px
             inset: 0
-            opacity: 1       
+            opacity: 1 
+        &:hover
+            &::before
+                background: $base-color   
         &:checked
             &+input[type="text"]
                 text-decoration: line-through
@@ -93,7 +97,7 @@ body
         color: #fff
         background: $check-color
         &:hover
-            background: #122021
+            background: $base-color
             color: #ccc
         font:
             size: 1.1em
@@ -102,12 +106,22 @@ body
         min-height: 40px
         border-radius: 1em
 .todo__controls
+    display: flex
+    flex-direction: column
+    min-height: 200px
+    justify-content: space-around
     input
+        -webkit-appearance: none
+        background: $check-color
+        border-radius: 4px
+        height: 40px
         cursor: pointer
         letter-spacing: 1.5px
+        &:hover
+            background: $base-color
         font:
             size: 1.1em
             font-weight: 400
-        color: $check-color
+        color: #fff
         &:hover
             color: #fff
