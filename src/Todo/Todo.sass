@@ -23,20 +23,28 @@ body
             weight: 400
 .todo__create
     display: flex
+    flex-direction: column
+    margin: 1.5em 0
     input[type="text"]
         width: 100%
         border-radius: 0
-        padding: 0.75em
+        padding: 0.5em 0
         color: #fff
         border-bottom: 1px solid $border-color
         margin-right: 1em
         &:focus
             border-bottom: 1px solid #72a6ad
+        &::placeholder
+            font-size: 1.1em
+            font-weight: 400
+            letter-spacing: 1.5px
+            color: #2f494c
     input[type="submit"]
         -webkit-appearance: none
         border-radius: 4px
-        min-width: 120px
-        text-transform: uppercase
+        padding: 1em
+        margin-top: 1em
+        text-transform: lowercase
         letter-spacing: 1.5px
         background: #22383B
         color: #fff
