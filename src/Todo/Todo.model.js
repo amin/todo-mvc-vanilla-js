@@ -6,7 +6,7 @@ export class TodoModel extends EventTarget {
     create = (task, id) => {
         if (!task) return;
         localStorage.setItem(
-            id ? id : Date.now() + Math.floor(Math.random()),
+            id ? id : Date.now(),
             task instanceof Object
                 ? JSON.stringify(task)
                 : JSON.stringify({ task: task, completed: false })
@@ -23,12 +23,15 @@ export class TodoModel extends EventTarget {
     delete = (id) => {
         Number(id)
             ? localStorage.removeItem(id)
-            : console.warn("Task cannot be found.");
+            : (false);
         this.dispatchEvent(new CustomEvent("render"));
     };
 
-    filter = (todos) => {
-        return { tasks: todos.tasks.filter((e) => e.completed === true) };
+    filter = (filter) => {
+        this.dispatchEvent(new CustomEvent("render", {
+            detail: { 
+                todos: { tasks: this.todos.tasks.filter((e) => e.completed)} }
+        }));
     };
 
     update = (e) => {
@@ -40,6 +43,7 @@ export class TodoModel extends EventTarget {
 
     clear = () => {
         localStorage.clear();
+        this.dispatchEvent(new CustomEvent("render"));
     }
 
     get todos() {
