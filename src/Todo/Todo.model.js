@@ -56,6 +56,6 @@ export class TodoModel extends EventTarget {
             },
             []
         );
-        return { tasks: data.sort((a, b) => b.id - a.id) };
+        return { tasks: data.sort((a, b) => a.id - b.id) };
     }
 }
