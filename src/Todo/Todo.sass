@@ -151,6 +151,7 @@ body
     input
         background: $check-color
         border-radius: 4px
+        opacity: 0.7
         width: 40%
         flex-grow: 1
         margin: 0 0.5em
@@ -158,8 +159,11 @@ body
         cursor: pointer
         letter-spacing: 1.5px
         margin-bottom: 1em
+        &.active
+            opacity: 1
         &[name="clear"]
             width: 100%
+            opacity: 1
             background: #882828
             &:hover
                 background: #5d1111

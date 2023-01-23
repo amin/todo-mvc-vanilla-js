@@ -13,15 +13,18 @@ export class Todo {
     #initialize = () => {
         this.view.initialize(this.model.todos);
         this.#bindEvents();
-        this.model.addEventListener("render", (e) =>
+        this.model.addEventListener("render", (e) => {
             e.detail
                 ? this.#render(e.detail.todos)
-                : this.#render(this.model.todos)
-        );
+                : this.#render(this.model.todos);
+            if (!e.detail) return;
+            this.view.$root
+                .querySelector(`[name="filter-${e.detail.filter}"`)
+                .classList.add("active");
+        });
     };
 
     #bindEvents = () => {
-
         this.#on("click", '[type="checkbox"]', (e) => {
             this.model.check(e.currentTarget.closest("[data-id]").dataset.id);
         });
@@ -60,15 +63,15 @@ export class Todo {
         });
 
         this.#on("click", '[name="filter-completed"]', (e) => {
-            this.model.filter(0);
+            this.model.filter("completed");
         });
 
-        this.#on("click", '[name="filter-reset"]', () => {
-            this.#render(this.model.todos);
+        this.#on("click", '[name="filter-all"]', () => {
+            this.model.filter("all");
         });
 
         this.#on("click", '[name="filter-active"]', () => {
-            this.model.filter(1);
+            this.model.filter("active");
         });
 
         this.#on("click", '[name="clear"]', () => {

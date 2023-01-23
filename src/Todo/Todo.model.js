@@ -21,17 +21,29 @@ export class TodoModel extends EventTarget {
     };
 
     delete = (id) => {
-        Number(id)
-            ? localStorage.removeItem(id)
-            : (false);
+        Number(id) ? localStorage.removeItem(id) : false;
         this.dispatchEvent(new CustomEvent("render"));
     };
 
     filter = (filter) => {
-        this.dispatchEvent(new CustomEvent("render", {
-            detail: { 
-                todos: { tasks: this.todos.tasks.filter((e) => !filter ? e.completed : !e.completed)} }
-        }));
+        if (!this.todos) return;
+        if (!filter) return
+            this.dispatchEvent(
+                new CustomEvent("render", {
+                    detail: {
+                        filter: filter,
+                        todos: {
+                            tasks: this.todos.tasks.filter((e) =>
+                                filter === "completed"
+                                    ? e.completed
+                                    : filter === "active"
+                                    ? !e.completed
+                                    : e.id
+                            ),
+                        },
+                    },
+                })
+            );
     };
 
     update = (e) => {
@@ -44,7 +56,7 @@ export class TodoModel extends EventTarget {
     clear = () => {
         localStorage.clear();
         this.dispatchEvent(new CustomEvent("render"));
-    }
+    };
 
     get todos() {
         if (!localStorage.length) return null;
