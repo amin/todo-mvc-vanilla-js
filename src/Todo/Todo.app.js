@@ -17,10 +17,6 @@ export class Todo {
             e.detail
                 ? this.#render(e.detail.todos)
                 : this.#render(this.model.todos);
-            if (!e.detail) return;
-            this.view.$root
-                .querySelector(`[name="filter-${e.detail.filter}"`)
-                .classList.add("active");
         });
     };
 
