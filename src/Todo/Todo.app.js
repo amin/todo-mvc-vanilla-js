@@ -14,11 +14,14 @@ export class Todo {
         this.view.initialize(this.model.todos);
         this.#bindEvents();
         this.model.addEventListener("render", (e) =>
-        e.detail ? this.#render(e.detail.todos) : this.#render(this.model.todos)
+            e.detail
+                ? this.#render(e.detail.todos)
+                : this.#render(this.model.todos)
         );
     };
 
     #bindEvents = () => {
+
         this.#on("click", '[type="checkbox"]', (e) => {
             this.model.check(e.currentTarget.closest("[data-id]").dataset.id);
         });
@@ -40,9 +43,17 @@ export class Todo {
             this.model.update(e);
         });
 
-        this.#on("focusin", '[name="task"]', (e) => 
-         (e.currentTarget.parentNode.dataset.completed) ? e.currentTarget.parentNode.firstElementChild.checked = false : (false)
-        );
+        this.#on("focus", '[name="task"]', (e) => {
+            const parent = e.currentTarget.parentNode;
+            if (parent.dataset.completed === "false") return;
+            const task = e.currentTarget.value;
+            parent.firstElementChild.checked = false;
+
+            this.#on("blur", '[name="task"]', (e) => {
+                if (task === e.currentTarget.value)
+                    parent.firstElementChild.checked = true;
+            });
+        });
 
         this.#on("click", '[name="delete"]', (e) => {
             this.model.delete(e.currentTarget.closest("[data-id]").dataset.id);

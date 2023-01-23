@@ -8,13 +8,13 @@ body
 
 .todo
     .copy
-        margin-top: 1em
         display: flex
-        align-items: center
         justify-content: center
         a
+            svg
+                vertical-align: middle
+                margin-right: .5em
             font-size: 1.1em
-            margin-left: .5em
             text-decoration: none
             color: #22383B
             letter-spacing: 1.5px
@@ -41,10 +41,12 @@ body
     input[type="text"]
         width: 100%
         border-radius: 0
+        letter-spacing: 1.5px
         padding: 0.5em 0
         color: #fff
         border-bottom: 1px solid $border-color
         margin-right: 1em
+        position: relative
         &:focus
             border-bottom: 1px solid #72a6ad
         &::placeholder
@@ -132,16 +134,32 @@ body
             weight: 500
 .todo__controls
     display: flex
-    flex-direction: column
-    min-height: 225px
-    justify-content: space-around
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    position: relative
+    margin-top: 3em
+    &::before
+        content: "Filters"
+        position: absolute
+        color: #1c2c2e
+        letter-spacing: 2px
+        text-transform: uppercase
+        top: -2em
+        font-size: 1em
+
     input
         background: $check-color
         border-radius: 4px
+        width: 40%
+        flex-grow: 1
+        margin: 0 0.5em
         height: 40px
         cursor: pointer
         letter-spacing: 1.5px
+        margin-bottom: 1em
         &[name="clear"]
+            width: 100%
             background: #882828
             &:hover
                 background: #5d1111

@@ -5,4 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const template = require("./base/templates/index.handlebars");
     document.body.insertAdjacentHTML("beforeend", template());
     new Todo();
+
+    document.getElementById('create').click().focus();
+    document.getElementById('create').click().focus();
 });
