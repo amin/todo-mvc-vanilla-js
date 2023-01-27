@@ -28,22 +28,21 @@ export class TodoModel extends EventTarget {
     filter = (filter) => {
         if (!this.todos) return;
         if (!filter) return
-            this.dispatchEvent(
-                new CustomEvent("render", {
-                    detail: {
-                        todos: {
-                            tasks: this.todos.tasks.filter((e) =>
-                                filter === "completed"
-                                    ? e.completed
-                                    : filter === "active"
-                                    ? !e.completed
-                                    : e.id
-                            ),
-                            [filter]: true
-                        },
+
+        this.dispatchEvent(
+            new CustomEvent("render", {
+                detail: {
+                    todos: {
+                        tasks: this.todos.tasks.filter((e) =>
+                            filter === "completed"
+                            ? e.completed: filter === "active"
+                            ? !e.completed : e.id
+                        ),
+                        [filter]: true
                     },
-                })
-            );
+                },
+            })
+        );
     };
 
     update = (e) => {
