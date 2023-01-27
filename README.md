@@ -1,2 +1,2 @@
 # todo
-Live demo: https://todo-mvc-vanilla-js.netlify.app/
+<a href="https://todo-mvc-vanilla-js.netlify.app/" target="_blank">Live demo</a>
