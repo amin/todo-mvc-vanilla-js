@@ -58,7 +58,7 @@ export class Todo {
             this.model.delete(e.currentTarget.closest("[data-id]").dataset.id);
         });
 
-        this.#on("click", '[name="filter-completed"]', (e) => {
+        this.#on("click", '[name="filter-completed"]', () => {
             this.model.filter("completed");
         });
 
@@ -82,7 +82,7 @@ export class Todo {
     };
 
     #render = (data) => {
-        this.view.renderElements(data);
+        this.view.render(data);
         this.#bindEvents();
     };
 }

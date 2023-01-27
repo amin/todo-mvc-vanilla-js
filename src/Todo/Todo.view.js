@@ -1,18 +1,18 @@
 export class TodoView {
     initialize = (data) => {
         this.$root = document.getElementById("root");
-        this.renderElements(data);
+        this.render(data);
     };
 
-    renderElements = (data) => {
-        this.attachHTML(this.$root, "afterbegin", this.compileTemplate(data));
+    render = (data) => {
+        this.#attachHTML(
+            this.$root, 
+            "afterbegin", 
+            require("./Todo.handlebars")(data)
+            );
     };
 
-    compileTemplate = (data) => {
-        return require("./Todo.handlebars")(data);
-    };
-
-    attachHTML = (element, position, template) => {
+    #attachHTML = (element, position, template) => {
         element.textContent = "";
         element.insertAdjacentHTML(position, template);
     };
