@@ -45,10 +45,10 @@ export class TodoModel extends EventTarget {
         );
     };
 
-    update = (e) => {
+    update = (task) => {
         this.create(
-            e.currentTarget.value,
-            e.currentTarget.closest("li[data-id]").dataset.id
+            task.value,
+            task.closest("li[data-id]").dataset.id
         );
     };
 

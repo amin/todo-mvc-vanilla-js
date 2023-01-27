@@ -39,7 +39,7 @@ export class Todo {
         });
 
         this.#on("change", '[name="task"]', (e) => {
-            this.model.update(e);
+            this.model.update(e.currentTarget);
         });
 
         this.#on("focus", '[name="task"]', (e) => {
@@ -58,16 +58,8 @@ export class Todo {
             this.model.delete(e.currentTarget.closest("[data-id]").dataset.id);
         });
 
-        this.#on("click", '[name="filter-completed"]', () => {
-            this.model.filter("completed");
-        });
-
-        this.#on("click", '[name="filter-all"]', () => {
-            this.model.filter("all");
-        });
-
-        this.#on("click", '[name="filter-active"]', () => {
-            this.model.filter("active");
+        this.#on("click", '[name^="filter-"]', (e) => {
+            this.model.filter(e.currentTarget.value);
         });
 
         this.#on("click", '[name="clear"]', () => {
